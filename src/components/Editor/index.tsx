@@ -8,6 +8,7 @@ class App extends Component {
     return (
       <CKEditor
         editor={ClassicEditor}
+        style={{height: 300}}
         data="<p>Hello from CKEditor 5!</p>"
         onReady={editor => {
           // You can store the "editor" and use when it is needed.
