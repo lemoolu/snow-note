@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tree } from 'antd';
 import type { DataNode, TreeProps } from 'antd/es/tree';
+import type { FileOrDir } from '@/type';
 
 const treeData: DataNode[] = [
   {
@@ -32,26 +33,43 @@ const treeData: DataNode[] = [
   },
 ];
 
-const App: React.FC = () => {
-  const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
-  };
+interface CatalogProps {
+  treeData: FileOrDir[],
+  onFileSelect: (checkedKeys: string) => void;
+}
 
-  const onCheck: TreeProps['onCheck'] = (checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
+const Catalog: React.FC<CatalogProps> = (props) => {
+  const {
+    treeData,
+    onFileSelect,
+  } = props;
+
+  const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
+    const { selectedNodes } = info;
+    if (selectedNodes.length > 0 && !selectedNodes[0].children) {
+      onFileSelect && onFileSelect(selectedKeys[0] as string);
+    }
   };
 
   return (
-    <Tree
-      checkable
-      defaultExpandedKeys={['0-0-0', '0-0-1']}
-      defaultSelectedKeys={['0-0-0', '0-0-1']}
-      defaultCheckedKeys={['0-0-0', '0-0-1']}
+    <Tree<FileOrDir>
+      // checkable
+      blockNode
       onSelect={onSelect}
-      onCheck={onCheck}
+      // onCheck={_onCheck}
+      // onSelect={_onCheck}
+      // checkedKeys={checkedKeys}
+      fieldNames={{
+        title: 'name',
+        key: 'path',
+        children: 'children'
+      }}
       treeData={treeData}
+      titleRender={(node) => {
+        return node.name;
+      }}
     />
   );
 };
 
-export default App;
+export default Catalog;

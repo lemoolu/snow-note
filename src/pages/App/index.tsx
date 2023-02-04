@@ -2,14 +2,14 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./index.less";
-import Editor from '@/components/Editor';
-import Catalog from '@/components/Catalog';
 import { Row, Col, Tabs, Space, Button } from 'antd';
-import { readDir } from '@/util';
 import useStore from '@/store';
-import Setting from '@/assets/setting.svg';
 import { SettingOutlined, FileTextOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
+import Note from '@/pages/Note';
+import Setting from '@/pages/Setting';
+import { getCatalog } from '@/util';
+import { useAsyncEffect } from 'ahooks';
 
 function MenuBtn(props) {
   return (
@@ -24,43 +24,38 @@ function MenuBtn(props) {
 
 function App() {
 
-  const { menuActive, setMenuActive } = useStore();
+  const menuActive = useStore(state => state.menuActive);
+  const setStore = useStore(state => state.setStore);
+
+  console.log('menuActive', menuActive)
+  const child = {
+    'note': <Note />,
+    'setting': <Setting />
+  }
+
+  useAsyncEffect(async () => {
+    const catalog = await getCatalog();
+    setStore({ catalog });
+    // console.log(catalog)
+  }, []);
 
   console.log('menuActive', menuActive)
 
   return (
     <div className="flex h-full absolute w-full">
-      <div className="flex flex-col w-12 bg-slate-50 justify-between items-center">
+      <div className="flex flex-col w-12 bg-slate-300 justify-between items-center">
         <div>
-          <MenuBtn active={menuActive === 'app'} onClick={() => setMenuActive('app')}>
-            <FileTextOutlined />
+          <MenuBtn active={menuActive === 'note'} onClick={() => setState({ menuActive: 'note' })}>
+            <FileTextOutlined style={{ position: 'relative', top: -4 }} />
           </MenuBtn>
 
         </div>
-        <MenuBtn active={menuActive === 'setting'} onClick={() => setMenuActive('setting')}>
-          <SettingOutlined />
+        <MenuBtn active={menuActive === 'setting'} onClick={() => setState({ menuActive: 'setting' })}>
+          <SettingOutlined style={{ position: 'relative', top: -4 }} />
         </MenuBtn>
-
-      </div>
-      <div className="flex-none w-64">
-        <Catalog />
       </div>
       <div className="flex-auto relative w-0">
-        <Tabs
-          defaultActiveKey="1"
-          type="editable-card"
-          style={{ height: '100%' }}
-          items={new Array(30).fill(null).map((_, i) => {
-            const id = String(i);
-            return {
-              label: `Tab-${id}`,
-              key: id,
-              disabled: i === 28,
-              children: <Editor />,
-            };
-          })}
-        />
-        {/* <Editor /> */}
+        {child[menuActive]}
       </div>
     </div>
   );

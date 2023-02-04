@@ -1,41 +1,25 @@
-# Tauri + React + Typescript
+# Snow Note
+基于tauri+react+antd+react的笔记软件
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## Why
+* 简单、干净、易用、响应快
+* 开源透明
+* 支持全量导入导出
 
-## Recommended IDE Setup
+## 基本能力
+1. 文档编辑
+   1. 目录管理
+   2. 文档编辑，自动保存
+   3. 导入导出
+   4. 自动git同步
+   5. 修改历史同步
+2. 配置能力
+   1. 主题
+   2. 图片上传配置
+   3. git仓库配置
+3. 编辑历史
+   1. git日志分析回滚
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
-
-
-## rust
-* 文件读取
-* 文件写入
-* 目录读取
-* 文件移动
-* git提交
-* git拉取
-* git日志
-
-## Web
-* 配置功能
-  * 知识库目录配置
-  * 图片上传配置
-  * 主题配置：黑白
-  * git配置
-* 目录
-  * 树显示
-  * 添加文件夹，添加文件，删除
-  * 删除文件，文件夹
-  * 托拉拽
-* 文件
-  * 新建
-  * 编辑，自动保存
-  * 删除
-  * 日志查看
-* git
-  * 拉取
-  * 提交
-
-## roadmap
-1. 只支持本地文件管理
-2. 支持git文件管理
+## 开发
+1. yarn install
+2. yarn run tauri dev

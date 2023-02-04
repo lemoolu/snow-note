@@ -6,12 +6,15 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "tauri-app",
+    "productName": "SnowNote",
     "version": "0.0.0"
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "scope": ["$HOME/**/*"]
+      }
     },
     "bundle": {
       "active": true,
@@ -55,10 +58,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 800,
         "resizable": true,
-        "title": "tauri-app",
-        "width": 800
+        "title": "SnowNote",
+        "width": 1200
       }
     ]
   }
