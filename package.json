@@ -13,9 +13,8 @@
   "main": "main.js",
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
-    "@ckeditor/ckeditor5-build-classic": "^35.4.0",
-    "@ckeditor/ckeditor5-react": "^5.0.6",
     "@tauri-apps/api": "^1.2.0",
+    "@toast-ui/react-editor": "^3.2.2",
     "ahooks": "^3.7.4",
     "antd": "^5.1.4",
     "classnames": "^2.3.2",

@@ -5,7 +5,7 @@ interface Store {
   menuActive: string;
   catalog: FileOrDir[];
   /** 当前编辑的文件path */
-  editFile: string | null;
+  editFilePath: string | null;
   /** 当前已经打开的文档队列 */
   // openFilesArray: string[],
   setStore: (value: Partial<Omit<Store, 'setStore'>>) => void;
@@ -14,7 +14,7 @@ interface Store {
 const useStore = create<Store>((set) => ({
   menuActive: 'note',
   catalog: [],
-  editFile: null,
+  editFilePath: null,
   setStore: (value: any) => {
     set({ ...value });
   },

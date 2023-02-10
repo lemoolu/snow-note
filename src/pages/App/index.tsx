@@ -43,12 +43,11 @@ function App() {
 
   return (
     <div className="flex h-full absolute w-full">
-      <div className="flex flex-col w-12 bg-slate-300 justify-between items-center">
+      <div className="flex flex-col w-12 bg-slate-300 justify-between items-center ">
         <div>
           <MenuBtn active={menuActive === 'note'} onClick={() => setState({ menuActive: 'note' })}>
             <FileTextOutlined style={{ position: 'relative', top: -4 }} />
           </MenuBtn>
-
         </div>
         <MenuBtn active={menuActive === 'setting'} onClick={() => setState({ menuActive: 'setting' })}>
           <SettingOutlined style={{ position: 'relative', top: -4 }} />

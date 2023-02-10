@@ -68,6 +68,7 @@ const Catalog: React.FC<CatalogProps> = (props) => {
       titleRender={(node) => {
         return node.name;
       }}
+      style={{ background: 'none' }}
     />
   );
 };
